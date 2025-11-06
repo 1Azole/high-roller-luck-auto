@@ -94,9 +94,10 @@ def build_markdown(enriched: List[Dict]) -> str:
         lines.append(f"| {r['name']} | {r['standingsDisp']} | {pfpa_col} | {luck_str} |")
     return header + "\n" + "\n".join(lines)
 
-def main():
-    d    # Send emails only during fantasy season: from the 2nd Tuesday in September to the 4th Tuesday in December
+def main()::
     import calendar
+    # Send emails only during fantasy season: from the 2nd Tuesday in September to the 4th Tuesday in December
+
     import pytz
     from datetime import datetime, date
     tz = pytz.timezone('America/New_York')
