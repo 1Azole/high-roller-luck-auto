@@ -4,7 +4,10 @@ on:
   schedule:
     # 14:00 UTC Tuesday ≈ 09:00 AM US/Eastern (handles DST automatically by UTC)
     - cron: "0 14 * * TUE"
+          # 14:00 UTC on November 7
+      - cron: "0 14 7 11 *"
   workflow_dispatch: {}
+      
 
 jobs:
   run:
