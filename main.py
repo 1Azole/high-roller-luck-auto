@@ -95,7 +95,29 @@ def build_markdown(enriched: List[Dict]) -> str:
     return header + "\n" + "\n".join(lines)
 
 def main():
-    data = fetch_league_json(LEAGUE_ID, SEASON, SWID, ESPN_S2)
+    d    # Send emails only during fantasy season: from the 2nd Tuesday in September to the 4th Tuesday in December
+    import calendar
+    import pytz
+    from datetime import datetime, date
+    tz = pytz.timezone('America/New_York')
+    today = datetime.now(tz).date()
+    year = today.year
+    def nth_weekday_of_month(y: int, month: int, weekday: int, n: int) -> date:
+        cal = calendar.monthcalendar(y, month)
+        count = 0
+        for week in cal:
+            if week[weekday] != 0:
+                count += 1
+                if count == n:
+                    return date(y, month, week[weekday])
+        return None
+    second_tuesday_september = nth_weekday_of_month(year, 9, calendar.TUESDAY, 2)
+    fourth_tuesday_december = nth_weekday_of_month(year, 12, calendar.TUESDAY, 4)
+    if second_tuesday_september and fourth_tuesday_december:
+        if today < second_tuesday_september or today > fourth_tuesday_december:
+            print("Outside active season. Skipping email.")
+            return
+data = fetch_league_json(LEAGUE_ID, SEASON, SWID, ESPN_S2)
     rows = extract_rows(data)
 
     standings_sorted = stable_sort(rows, standings_sort)
