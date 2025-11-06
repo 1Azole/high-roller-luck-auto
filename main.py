@@ -94,16 +94,16 @@ def build_markdown(enriched: List[Dict]) -> str:
         lines.append(f"| {r['name']} | {r['standingsDisp']} | {pfpa_col} | {luck_str} |")
     return header + "\n" + "\n".join(lines)
 
-def main()::
+def main():
     import calendar
     # Send emails only during fantasy season: from the 2nd Tuesday in September to the 4th Tuesday in December
 
-    import pytz
+      import pytz
     from datetime import datetime, date
     tz = pytz.timezone('America/New_York')
     today = datetime.now(tz).date()
     year = today.year
-    def nth_weekday_of_month(y: int, month: int, weekday: int, n: int) -> date:
+    def nth_weekday_of_month(y: int, month: int, weekday: i datent, n: int) -> date:
         cal = calendar.monthcalendar(y, month)
         count = 0
         for week in cal:
